@@ -21,7 +21,7 @@ version = 1.0.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.3.0,sqlite3,pillow
+requirements = python3,kivy,sqlite3,pillow
 
 # (str) Presplash of your application
 #presplash.filename = %(source.dir)s/assets/logo.png
@@ -43,12 +43,6 @@ android.api = 33
 
 # (int) Minimum API your APK will support.
 android.minapi = 21
-
-# (str) Android NDK version to use
-android.ndk = 25b
-
-# (str) Android SDK version to use
-android.sdk = 33
 
 # (list) Android architectures to build for
 android.archs = arm64-v8a, armeabi-v7a
