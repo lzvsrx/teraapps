@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v4
@@ -50,7 +50,9 @@ jobs:
           cmake \
           libncurses5-dev \
           libncursesw5-dev \
-          libtinfo5
+          libtinfo5 \
+          libtinfo6 \
+          libncurses5
 
     - name: Install Python dependencies
       run: |
