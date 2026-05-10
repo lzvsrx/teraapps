@@ -1,24 +1,60 @@
-[app]
+# (str) Title of your application
 title = Tera
+
+# (str) Package name
 package.name = tera
-package.domain = org.tera
+
+# (str) Package domain (needed for android packaging)
+package.domain = org.lzvsrx
+
+# (str) Source code where the main.py live
 source.dir = .
-source.include_exts = py,png,jpg,kv,atlas,db
-version = 0.1
-requirements = python3,kivy,sqlite3
-orientation = portrait
-osx.python_version = 3
-osx.kivy_version = 1.9.1
-fullscreen = 0
-icon.filename = %(source.dir)s/icon.png
+
+# (list) Source files to include (let empty to include all the files)
+source.include_exts = py,png,jpg,kv,atlas,db,ttf,otf
+
+# (list) List of inclusions using pattern matching
+source.include_patterns = assets/*,*.ttf,*.otf
+
+# (str) Application version
+version = 1.0.0
+
+# (list) Application requirements
+# comma separated e.g. requirements = sqlite3,kivy
+requirements = python3,kivy==2.3.0,sqlite3,pillow
+
+# (str) Presplash of your application
 #presplash.filename = %(source.dir)s/assets/logo.png
 
+# (str) Icon of your application
+icon.filename = %(source.dir)s/icon.png
+
+# (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
+orientation = portrait
+
+# (bool) Indicate if the application should be fullscreen or not
+fullscreen = 0
+
+# (list) Permissions
 android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
-android.api = 31
+
+# (int) Target Android API, should be as high as possible.
+android.api = 33
+
+# (int) Minimum API your APK will support.
 android.minapi = 21
-android.sdk = 31
-android.ndk = 23b
+
+# (str) Android NDK version to use
+android.ndk = 25b
+
+# (str) Android SDK version to use
+android.sdk = 33
+
+# (list) Android architectures to build for
 android.archs = arm64-v8a, armeabi-v7a
+
+# (bool) Allow skipping setup of pyjnius
+android.skip_setup_pyjnius = 0
 
 [buildozer]
 log_level = 2

@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v3
@@ -19,13 +19,45 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install dependencies
+    - name: Install system dependencies
       run: |
         sudo apt update
-        sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
-        pip install --upgrade pip
+        sudo apt install -y \
+          build-essential \
+          git \
+          python3-dev \
+          ffmpeg \
+          libsdl2-dev \
+          libsdl2-image-dev \
+          libsdl2-mixer-dev \
+          libsdl2-ttf-dev \
+          libportmidi-dev \
+          libswscale-dev \
+          libavformat-dev \
+          libavcodec-dev \
+          zlib1g-dev \
+          libgstreamer1.0-dev \
+          gstreamer1.0-plugins-base \
+          gstreamer1.0-plugins-good \
+          libffi-dev \
+          libssl-dev \
+          openjdk-17-jdk \
+          zip \
+          unzip \
+          autoconf \
+          libtool \
+          pkg-config \
+          cmake \
+          libncurses5-dev \
+          libncursesw5-dev \
+          libtinfo5
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
         pip install Cython==0.29.33
         pip install buildozer
+        pip install pillow
 
     - name: Build with Buildozer
       run: |
@@ -39,10 +71,16 @@ jobs:
         name: tera-app-debug
         path: bin/*.apk
 
+    - name: Get tag version
+      id: get_version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
     - name: Create Release
       if: startsWith(github.ref, 'refs/tags/v')
       uses: softprops/action-gh-release@v1
       with:
         files: bin/*.apk
+        name: Release ${{ steps.get_version.outputs.VERSION }}
+        body: "Build automático do Agente Tera para Android."
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
