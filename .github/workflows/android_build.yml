@@ -9,7 +9,9 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
     - uses: actions/checkout@v4
@@ -22,7 +24,7 @@ jobs:
     - name: Install system dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y \
+        sudo apt-get install -y --fix-missing \
           build-essential \
           git \
           python3-dev \
@@ -48,11 +50,8 @@ jobs:
           libtool \
           pkg-config \
           cmake \
-          libncurses5-dev \
-          libncursesw5-dev \
-          libtinfo5 \
-          libtinfo6 \
-          libncurses5
+          libncurses-dev \
+          libtinfo-dev
 
     - name: Install Python dependencies
       run: |
