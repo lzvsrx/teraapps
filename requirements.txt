@@ -1,4 +1,0 @@
-briefcase
-toga
-toga-android
-toga-winforms
