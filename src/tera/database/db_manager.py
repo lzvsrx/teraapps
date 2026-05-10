@@ -1,19 +1,23 @@
 import sqlite3
 import hashlib
 import os
+from pathlib import Path
 
 class DatabaseManager:
-    def __init__(self, db_path="database/tera.db"):
-        self.db_path = db_path
+    def __init__(self, app):
+        self.app = app
+        # Use BeeWare's standard data directory
+        data_dir = Path(self.app.paths.data)
+        data_dir.mkdir(parents=True, exist_ok=True)
+        self.db_path = data_dir / "tera.db"
         self._init_db()
 
     def _get_connection(self):
-        return sqlite3.connect(self.db_path)
+        return sqlite3.connect(str(self.db_path))
 
     def _init_db(self):
         with self._get_connection() as conn:
             cursor = conn.cursor()
-            # Users table
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS users (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -23,7 +27,6 @@ class DatabaseManager:
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """)
-            # Files/Data table for professions
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS profession_data (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,

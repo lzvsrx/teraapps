@@ -1,41 +1,44 @@
-# TERA - Agente Pessoal de Serviço
+# TERA - Agente Pessoal de Serviço (BeeWare Version)
 
-Este é o aplicativo **TERA**, um agente pessoal futurista desenvolvido com Python e Flet para Android.
+Este é o aplicativo **TERA**, um agente pessoal futurista desenvolvido com **Python** e **BeeWare (Toga)** para Android e Desktop.
 
 ## 🚀 Funcionalidades
 - **Autenticação Segura**: Sistema de login e cadastro com hash SHA-256.
-- **Banco de Dados Local**: Armazenamento de dados persistente usando SQLite.
-- **Interface Cyberpunk**: Design moderno com cores neon, fontes futuristas (Orbitron/Exo2) e efeitos de brilho.
+- **Banco de Dados Nativo**: Armazenamento de dados persistente usando SQLite (diretório de dados padrão do sistema).
+- **Interface Nativa**: Utiliza widgets nativos do sistema operacional para melhor performance.
 - **Agente de Serviço**: Terminal interativo para comandos e gerenciamento de dados por profissão.
-- **Multi-Profissões**: Adaptável para diversas áreas (Tecnologia, Saúde, Educação, etc).
-
-## 🎨 Tema Visual
-- **Fundo**: Preto Profundo (#05060A)
-- **Cores**: Roxo Neon (#A855F7) e Azul Neon (#3B82F6)
-- **Fontes**: Orbitron (Logo/Títulos) e Exo 2 (Interface)
 
 ## 🛠️ Como executar localmente
 1. Instale as dependências:
    ```bash
-   pip install -r requirements.txt
+   pip install briefcase toga
    ```
-2. Execute o aplicativo:
+2. Execute o aplicativo em modo de desenvolvimento:
    ```bash
-   python main.py
+   briefcase dev
    ```
 
-## 📱 Como gerar o APK
-Para gerar o APK para Android, você precisará do [Flutter SDK](https://docs.flutter.dev/get-started/install) instalado no seu sistema.
+## 📱 Como gerar o APK (Android)
+Para gerar o APK utilizando o BeeWare:
 
-Execute o seguinte comando na raiz do projeto:
-```bash
-flet build apk --project-name tera --display-name "TERA" --description "Agente Pessoal de Serviço"
-```
-
-O ícone será gerado automaticamente a partir do arquivo `assets/logo.png`. Certifique-se de colocar a logo desejada nessa pasta com o nome `logo.png`.
+1. Crie o projeto Android:
+   ```bash
+   briefcase create android
+   ```
+2. Compile o projeto:
+   ```bash
+   briefcase build android
+   ```
+3. Execute no emulador ou dispositivo:
+   ```bash
+   briefcase run android
+   ```
+4. Gere o pacote de distribuição:
+   ```bash
+   briefcase package android
+   ```
 
 ## 📁 Estrutura do Projeto
-- `main.py`: Ponto de entrada e lógica da interface.
-- `database/db_manager.py`: Gerenciamento do banco de dados SQLite e segurança.
-- `assets/`: Pasta para imagens e fontes.
-- `requirements.txt`: Dependências do projeto.
+- `src/tera/app.py`: Lógica principal da interface Toga.
+- `src/tera/database/db_manager.py`: Gerenciamento do banco de dados SQLite.
+- `pyproject.toml`: Configurações do BeeWare/Briefcase.
