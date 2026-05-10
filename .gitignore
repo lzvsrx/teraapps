@@ -1,0 +1,12 @@
+# Buildozer
+.buildozer/
+bin/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# SQLite
+*.db
